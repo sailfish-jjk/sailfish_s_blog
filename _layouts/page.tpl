@@ -2,10 +2,10 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8" />
-<meta name="author" content="{{ site.meta.author.name }}" />
+<meta name="author" content="dylan" />
 <meta name="keywords" content="{{ page.tags | join: ',' }}" />
 <title>{{ site.name }}{% if page.title %} / {{ page.title }}{% endif %}</title>
-<link href="http://mytharcher.github.com/feed.xml" rel="alternate" title="{{ site.name }}" type="application/atom+xml" />
+<link href="http://dylanvivi.github.com/feed.xml" rel="alternate" title="{{ site.name }}" type="application/atom+xml" />
 <link rel="stylesheet" type="text/css" href="/assets/css/site.css" />
 <link rel="stylesheet" type="text/css" href="/assets/css/code/github.css" />
 {% for style in page.styles %}<link rel="stylesheet" type="text/css" href="{{ style }}" />
@@ -23,7 +23,7 @@
 </div>
 
 <side>
-	<h2><a href="/">{{ site.name }}</a><a href="/feed.xml" class="feed-link" title="Subscribe"><img src="http://blog.rexsong.com/wp-content/themes/rexsong/icon_feed.gif" alt="RSS feed" /></a></h2>
+	<h2><a href="/">{{ site.name }}</a><a href="/feed.xml" class="feed-link" title="RSS"><img src="http://blog.rexsong.com/wp-content/themes/rexsong/icon_feed.gif" alt="RSS feed" /></a></h2>
 	
 	<nav class="block">
 		<ul>
@@ -43,7 +43,7 @@
 			{% if site.meta.author.gravatar %}<img src="{{ site.meta.gravatar}}{{ site.meta.author.gravatar }}?s=48" />{% endif %}
 			<figcaption><strong>{{ site.meta.author.name }}</strong></figcaption>
 		</figure>
-		<p>Write something about yourself.</p>
+		<p>我要抱着向日葵，一点一点，开始歌唱……</p>
 	</div>
 	
 	<div class="block block-license">
