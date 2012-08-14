@@ -5,7 +5,7 @@ permalink: /posts/:title.html
 exclude:
   - README.md
 
-name: 小白菜的学习之路
+name: 闲敲棋子
 host: dylanvivi.github.com
 
 custom:
@@ -23,9 +23,9 @@ meta:
     author:
         name: Dylan
         email: dylanvivi@gmail.com
-        disqus: your-disqus-short-name              # Disqus缩略标识
+        disqus: dylanvivi 			                # Disqus缩略标识
         gcse: 002980071478006019237:bcmd-n00ura     # Google自定义搜索标识ID
-        github: dylanvivi                 # GitHub账号
+        github: dylanvivi              			    # GitHub账号
         gravatar: b1b40161ebd87b851d3eb65e870f1213  # Gravatar头像标识
 
     disqus: disqus.com/embed.js                     # Disqus评论的JS地址
