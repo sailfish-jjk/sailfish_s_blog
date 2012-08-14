@@ -10,13 +10,13 @@ host: dylanvivi.github.com
 
 custom:
     category:
-        default: 学习笔记
-        another: 遇到问题
+        notes: 学习笔记
+        problems: 遇到问题
     categories:
-      - name:  default
+      - name:  notes
         title: 学习笔记
 
-      - name:  another
+      - name:  problems
         title: 遇到问题
 
 meta:
