@@ -7,7 +7,7 @@
 <title>{{ site.name }}{% if page.title %} / {{ page.title }}{% endif %}</title>
 <link href="http://dylanvivi.github.com/feed.xml" rel="alternate" title="{{ site.name }}" type="application/atom+xml" />
 <link rel="stylesheet" type="text/css" href="/assets/css/site.css" />
-<link rel="stylesheet" type="text/css" href="/assets/css/code/github.css" />
+<link rel="stylesheet" type="text/css" href="/assets/css/code/googlecode.css" />
 {% for style in page.styles %}<link rel="stylesheet" type="text/css" href="{{ style }}" />
 {% endfor %}
 </head>
@@ -73,14 +73,11 @@
 </side>
 
 <script src="http://elfjs.googlecode.com/files/elf-0.4.0-min.js"></script>
-<script src="/assets/js/highlight.js"></script>
-<script src="/assets/js/hljs/languages/css.js"></script>
-<script src="/assets/js/hljs/languages/xml.js"></script>
-<script src="/assets/js/hljs/languages/javascript.js"></script>
-<script src="/assets/js/hljs/languages/php.js"></script>
-<script src="/assets/js/hljs/languages/ruby.js"></script>
-
+<script src="/assets/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 <script src="/assets/js/site.js"></script>
+
+
 {% for script in page.scripts %}<script src="{{ script }}"></script>
 {% endfor %}
 <script>

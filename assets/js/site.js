@@ -82,14 +82,4 @@ var site = {
 };
 
 
-elf(function () {
-	elf('pre').forEach(function (item) {
-		hljs.highlightBlock(item);
-	});
-	
-	var module = document.body.className.replace(/page-type-/g, '').split(' ');
-	module.forEach(function (item) {
-		var initer = site.InitMap[item];
-		initer && elf(initer);
-	});
-});
+

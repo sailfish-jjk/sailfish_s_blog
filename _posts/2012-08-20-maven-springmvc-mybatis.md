@@ -35,3 +35,5 @@ Profiles是maven的一个很关键的术语：profile是用来定义一些在bui
 
 
 mvn archetype:create -DgroupId=com.dylanvivi -DartifactId=dylan-archetype -DarchetypeArtifactId=maven-archetype-archetype
+
+{% include references.md %}
