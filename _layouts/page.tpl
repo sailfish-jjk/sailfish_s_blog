@@ -75,12 +75,19 @@
 <script src="http://elfjs.googlecode.com/files/elf-0.4.0-min.js"></script>
 <script src="/assets/js/highlight.pack.js"></script>
 
-
-
 <script src="/assets/js/site.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
 {% for script in page.scripts %}<script src="{{ script }}"></script>
 {% endfor %}
-<script src="http://{{ site.meta.author.disqus }}.{{ site.meta.disqus }}"></script>
+<script src = "http://{{ site.meta.author.disqus }}.{{ site.meta.disqus }}"/>
+<script>
+site.Urls.GOOGLE_API = '{{site.meta.gapi}}';
+site.Urls.DISCUS_COMMENT = '{{ site.meta.author.disqus }}' ? 'http://{{ site.meta.author.disqus }}.{{ site.meta.disqus }}' : '';
 
+site.Vars.SITE_NAME = '{{ site.name }}';
+site.Vars.GOOGLE_CUSTOM_SEARCH_ID = '{{ site.meta.author.gcse }}';
+</script>
 </body>
 </html>
