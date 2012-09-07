@@ -81,17 +81,6 @@ var site = {
 	Urls: {}
 };
 
-elf(function () {
-	  
-  var module = document.body.className.replace(/page-type-/g, '').split(' ');
-	  	
-  module.forEach(function (item) {
-	  	
-    var initer = site.InitMap[item];
-	  	
-    initer && elf(initer);
-  });
-	  	
-});
+
 
 
