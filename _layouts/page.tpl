@@ -80,12 +80,7 @@
 <script src="/assets/js/site.js"></script>
 {% for script in page.scripts %}<script src="{{ script }}"></script>
 {% endfor %}
-<script>
-site.Urls.GOOGLE_API = '{{site.meta.gapi}}';
-site.Urls.DISCUS_COMMENT = '{{ site.meta.author.disqus }}' ? 'http://{{ site.meta.author.disqus }}.{{ site.meta.disqus }}' : '';
+<script src="http://{{ site.meta.author.disqus }}.{{ site.meta.disqus }}"></script>
 
-site.Vars.SITE_NAME = '{{ site.name }}';
-site.Vars.GOOGLE_CUSTOM_SEARCH_ID = '{{ site.meta.author.gcse }}';
-</script>
 </body>
 </html>
