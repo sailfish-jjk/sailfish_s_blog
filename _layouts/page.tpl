@@ -74,9 +74,10 @@
 
 <script src="http://elfjs.googlecode.com/files/elf-0.4.0-min.js"></script>
 <script src="/assets/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+
 <script src="/assets/js/site.js"></script>
 
+<script>hljs.initHighlightingOnLoad();</script>
 
 {% for script in page.scripts %}<script src="{{ script }}"></script>
 {% endfor %}
