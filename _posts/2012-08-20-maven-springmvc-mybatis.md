@@ -28,12 +28,57 @@ title : 学习Maven搭框架ing
 	maven-archetype-webapp
 
 4. 输入groupId & artifactID
+	
+5. 修改pom文件
+	<profiles>
+        <profile>
+            <!-- 生产环境 -->
+            <id>product</id>
+            <properties>
+                <package.environment>product</package.environment>
+            </properties>
+        </profile>
+        <profile>
+            <!-- 开发环境 -->
+            <id>dev</id>
+            <properties>
+                <package.environment>dev</package.environment>
+            </properties>
+        </profile>
+    </profiles>
+	
+	<!-- Profiles是maven的一个很关键的术语：profile是用来定义一些在build lifecycle中使用的environmental variations，profile可以设置成在不同的环境下激活不同的profile（例如：不同的OS激活不同的profile，不同的JVM激活不同的profile，不同的dabase激活不同的profile等等）。-->
 
 
+	<!-- 一些项目骨架的配置 -->
+	<finalName>springmybatis</finalName>
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <testSourceDirectory>src/test/java</testSourceDirectory>
+    <resources>
+        <resource>
+            <directory>src/main/resources</directory>
+            <filtering>true</filtering>
+        </resource>
+    </resources>
+    <testResources>
+        <testResource>
+            <directory>src/test/resources</directory>
+            <filtering>true</filtering>
+        </testResource>
+    </testResources>
+    <outputDirectory>webapp/WEB-INF/classes</outputDirectory>
+    <testOutputDirectory>target/test-classes</testOutputDirectory>
 
-Profiles是maven的一个很关键的术语：profile是用来定义一些在build lifecycle中使用的environmental variations，profile可以设置成在不同的环境下激活不同的profile（例如：不同的OS激活不同的profile，不同的JVM激活不同的profile，不同的dabase激活不同的profile等等）。
+6. 新建source folder : src/main/java
 
+7. 新建放mybatis xml文件夹 : src/main/resources/mapper
 
-mvn archetype:create -DgroupId=com.dylanvivi -DartifactId=dylan-archetype -DarchetypeArtifactId=maven-archetype-archetype
+8. 配置完pom以后, mvn clean. 在进行真正的构建之前进行一些清理工作
+
+Tips: Maven有三套相互独立的生命周期，请注意这里说的是“三套”，而且“相互独立”，初学者容易将Maven的生命周期看成一个整体，其实不然。这三套生命周期分别是：
+* Clean Lifecycle 在进行真正的构建之前进行一些清理工作。
+* Default Lifecycle 构建的核心部分，编译，测试，打包，部署等等。
+* Site Lifecycle 生成项目报告，站点，发布站点。
+
 
 {% include references.md %}

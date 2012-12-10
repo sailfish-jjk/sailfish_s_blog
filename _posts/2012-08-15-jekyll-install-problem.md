@@ -51,6 +51,10 @@ github部分就不多说了，这里用的是[SimpleGray](https://github.com/myt
 
 剩下的是git提交神马神马的了，问题不大，反正经常用忘不了~就先这样吧~
 
+** UPDATE **
+
+jekyll有时候无法编译md文件, 检查一下文件编码。比如我用notepad++的时候默认编码是ANSII，要改成UTF-8才能正常编译。
+
 {% include references.md %}
 
 
