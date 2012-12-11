@@ -4,14 +4,16 @@ category: notes
 title : 学习Maven搭框架ing
 ---
 
-** 下面开始SpringMVC + Mybatis 部分
+**下面开始SpringMVC + Mybatis 部分**
 
 1.  WEB-INF下建立web.xml
-	<?xml version="1.0" encoding="UTF-8"?>
-	<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-		http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	
+		<?xml version="1.0" encoding="UTF-8"?>
+		<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+			http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+		
 		<display-name>Test</display-name>
 		<welcome-file-list>
 			<welcome-file>index.html</welcome-file>
@@ -55,7 +57,7 @@ title : 学习Maven搭框架ing
 	
 2. 建立一些必要的包
 
-3. 编写Spring配置文件app*.xml\数据库配置文件
+3. 编写Spring配置文件app*.xml数据库配置文件
 
 4. 写测试Controller
 	

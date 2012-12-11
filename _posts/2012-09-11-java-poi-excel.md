@@ -9,17 +9,17 @@ Excel在"XXX.xls"中发现不可读取的内容
 
 找了半天,把所有格式删了,发现
 
-	HSSFRichTextString richString = new HSSFRichTextString(textValue);
-	HSSFFont font3 = workbook.createFont();
-	font3.setBoldweight(HSSFFont.BOLDWEIGHT_NORMAL);
-	richString.applyFont(font3);
-	cell.setCellValue(richString);
+		HSSFRichTextString richString = new HSSFRichTextString(textValue);
+		HSSFFont font3 = workbook.createFont();
+		font3.setBoldweight(HSSFFont.BOLDWEIGHT_NORMAL);
+		richString.applyFont(font3);
+		cell.setCellValue(richString);
 
 这段话删了就好使了....
 
 要用回最原始的:
 
-	cell.setCellValue(textValue);
+		cell.setCellValue(textValue);
 
 这个方法还是个过时的方法,被那个richText替代了.....
 
