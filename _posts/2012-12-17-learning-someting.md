@@ -91,7 +91,7 @@ service层处理业务逻辑,不做数据检验*
 	
 	*String 作为sql查出来的key, 里面的Object作为value. ibatis返回HashMap*
 	
-	<img src=""/>
+	<img src="https://lh4.googleusercontent.com/-tS3GBCB_D2I/UM7NDfxs_yI/AAAAAAAABAo/Zzbd8ieWEdE/s1118/ibatis-sql-map.png"/>
 	
 	那么对于上图, key就是媒体名称, value是媒体对象 + 各种属性. 而通过resultMap返回的结果Map<Object,Object>. 实际类型是 Map<Object,Map<Object,Object>> 这种格式. 
 	
