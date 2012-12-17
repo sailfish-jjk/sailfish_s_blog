@@ -61,5 +61,6 @@ title : 学习Maven搭框架ing
 
 4. 写测试Controller
 	
+**UPDATE: 框架整出来了... 刚上传 [SpringMVC+Mybatis](https://github.com/dylanvivi/springmybatis) 笔记有空再补...**
 
 {% include references.md %}
