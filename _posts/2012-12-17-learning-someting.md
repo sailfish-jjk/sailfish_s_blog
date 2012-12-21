@@ -26,29 +26,29 @@ service层处理业务逻辑,不做数据检验*
 
 	*例如:这个DtXmsMtN实体类里,status是数据库存的字段,其中Y表示成功,其他表示失败...我想把它翻译成中文,有两个地方可以修改,一个是实体类初始化setStatus()时, 对这个自定义的statusStr进行翻译. 另一种是在getStatusStr时, 对status进行判断并翻译. 如下...*
 
-	public class DtXmsMtN {
+		public class DtXmsMtN {
 
-		@Column(value = "STATUS")
-		private String status;
+			@Column(value = "STATUS")
+			private String status;
 
-		private String statusStr;
+			private String statusStr;
 
-		public String getStatus() {
-			return status;
+			public String getStatus() {
+				return status;
+			}
+
+			public void setStatus(String status) {
+				this.status = status;
+			}
+			
+			public String getStatusStr() {
+				if (status.equals("Y"))
+					statusStr = "成功";
+				else
+					statusStr="失败";
+				return statusStr;
+			}
 		}
-
-		public void setStatus(String status) {
-			this.status = status;
-		}
-		
-		public String getStatusStr() {
-			if (status.equals("Y"))
-				statusStr = "成功";
-			else
-				statusStr="失败";
-			return statusStr;
-		}
-	}
 
 	*另外, 大牛教育说, 不要为了一时的小省事儿而去丢掉数据库中的原始信息. 除非你确定以后再也不会用它. 否则不要直接去修改实体类中status的值, 而应该是建一个显示值来显示它~ so... 学习了~*
 
