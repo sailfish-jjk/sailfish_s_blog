@@ -142,5 +142,46 @@ service层处理业务逻辑,不做数据检验*
 			}
 			return list;
 		}
+		
+* 巧用HashSet:
+
+	其实是对HashSet性质的一种巧妙的应用~ 不能不崇拜大牛啊... 好吧,还是我自己没见识~ 代码说明一切.
+
+		/**
+		 * 计算群组会员数（去重后）
+		 * @param userid
+		 * @param groupids
+		 * @return 总计可发送人数
+		 */
+		@SuppressWarnings("unchecked")
+		public int CountOfGroups(int userid, int... groupids){
+			//TODO performance issue
+			Set<String> unique = new HashSet<String>();
+			for (int groupid : groupids) {
+				boolean isDefault = isGlobalDefaultGroup(groupid);
+				String sql = getRuleSqlByGroupid(userid, groupid, isDefault, "buyer_id");
+				log.debug(sql);
+				String cacheKey = "UserGroup::BuyerId:" + Coder.encryptMD5(sql);
+				List<String> list = (List<String>) cachedClient.get(cacheKey);
+				if (list == null) {
+					list = dao.getJdbcTemplate().queryForList(sql, String.class);
+					cachedClient.put(cacheKey, list);
+				}
+
+				if (list != null) {
+					unique.addAll(list); //<--亮点在这里
+					log.debug(groupid + "," + list.size() + "," + unique.size());
+				}
+			}
+			return unique.size();
+		} 
+		
+	上面就是利用了HashSet的性质, 顺道查了一下[HashSet的实现](http://alex09.iteye.com/blog/539549).
+	
+		HashSet 的实现其实非常简单，它只是封装了一个 HashMap 对象来存储所有的集合元素，
+		所有放入 HashSet 中的集合元素实际上由 HashMap 的 key 来保存，而 HashMap 的 value 
+		则存储了一个 PRESENT，它是一个静态的 Object 对象。 
+		
+	巧用这件事儿还真得从性质入手, 但是光知道性质还不好使. 重点是灵活运用~ 要是实在想不到怎么用也行, 那就看到了别人的代码记下来. 然后运用~~ 啦啦~~我又好开心...
 	
 {% include references.md %}
