@@ -45,6 +45,8 @@ category: notes
 
 流程：取代码 → 每次工作前更新代码到最新版本 → 修改代码 → 提交代码到服务器 <span style="color: #993300;">&nbsp;(这个应该是要养成的习惯吧，否则很容易造成冲突^^)</span>
 
+_配置git的用户信息_
+
     $ git config --global user.name
     $ git config --global user.email
 
