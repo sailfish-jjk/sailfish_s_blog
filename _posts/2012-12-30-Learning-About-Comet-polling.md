@@ -16,7 +16,7 @@ category: notes
 
 “推”的方式没用过，不过想象一下流程应该是这样的：
 
-  客户端请求--> 服务器响应（记录短信包、业务处理）--> 成功--> 提交网关--> 网关响应（记录短信包、发送）--> 返回成功信息给服务器（图）
+<img src="https://lh5.googleusercontent.com/-pdsHTuSgLPI/UVFaBOvFXhI/AAAAAAAABCo/MfRvS1EriNc/s803/%E6%B5%81%E7%A8%8B%E5%9B%BE.png"/>
 
 实际应用中，可以考虑“推”和“拉”结合的方式。
 
