@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 搞坏了配置文件于是重新配环境
-category: notes
+category: problems
 ---
 
 悲催的我为了6G内存换了win8预览版的64位系统，然后就经常各种死机。。。终于在前两天某次死机直接按电源的情况下，配置文件损坏了。。。

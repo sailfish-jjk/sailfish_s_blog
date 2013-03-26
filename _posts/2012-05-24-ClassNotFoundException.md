@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Maven + tomcat 报错 ClassNotFoundException
-category: notes
+category: problems
 ---
 
 具体问题描述如下：
