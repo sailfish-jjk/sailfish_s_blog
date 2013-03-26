@@ -21,6 +21,7 @@ master为默认本地分支
 
 *   获取更新
 
+
 1. git fetch &amp; git merge
 
 git fetch [remote-name] 从远程仓库中拉取所有你本地仓库中还没有的数据.
