@@ -21,18 +21,17 @@ master为默认本地分支
 
 *   获取更新
 
-
 1. git fetch &amp; git merge
 
-git fetch [remote-name] 从远程仓库中拉取所有你本地仓库中还没有的数据.
-
-需要记住，fetch 命令只是将远端的数据拉到本地仓库，并不自动合并到当前工作分支，只有当你确实准备好了，才能通过执行git merge命令合并
-
-<span style="color: #993300;">(个人觉得这个还是在eclipse插件中操作比较方便，先commit本地修改，然后fetch&amp;merge远程文件，这样可以保证本地修改不会被覆盖~有冲突的时候要手动处理一下冲突~罗童鞋命令行用的很熟，每次看他手指纷飞敲各种命令刷了一屏又一屏的黑白命令行，一种小白仰望大虾的心情就油然而生了~)</span>
+    git fetch [remote-name] 从远程仓库中拉取所有你本地仓库中还没有的数据.
+    
+    需要记住，fetch 命令只是将远端的数据拉到本地仓库，并不自动合并到当前工作分支，只有当你确实准备好了，才能通过执行git merge命令合并
+    
+    <span style="color: #993300;">(个人觉得这个还是在eclipse插件中操作比较方便，先commit本地修改，然后fetch&amp;merge远程文件，这样可以保证本地修改不会被覆盖~有冲突的时候要手动处理一下冲突~罗童鞋命令行用的很熟，每次看他手指纷飞敲各种命令刷了一屏又一屏的黑白命令行，一种小白仰望大虾的心情就油然而生了~)</span>
 
 2. git pull (= git fetch + git merge)
 
-git pull命令相当于git fetch + git merge, 即从远程仓库中拉取所有你本地仓库中还没有的数据, 并自动合并到当前工作分支.
+    git pull命令相当于git fetch + git merge, 即从远程仓库中拉取所有你本地仓库中还没有的数据, 并自动合并到当前工作分支.
 
 **处理冲突**
 
@@ -60,7 +59,7 @@ b) 修改已提交: git reset –hard HEAD 还原至上一个提交<span style="
 
 如果你现在的工作目录(work tree)里搞的一团乱麻, 但是你现在还没有把它们提交; 你可以通过下面的命令, 让工作目录回到上次提交时的状态(last committed state):
 
-    $ git reset --hard HEAD
+        $ git reset --hard HEAD
 
 
 这条件命令会把你工作目录中所有未提交的内容清空(当然这不包括未置于版控制下的文件 untracked files)
@@ -77,7 +76,7 @@ git checkout — &lt;path&gt;是从暂存区签出内容并恢复. 注意区别.
 
 1.撤销旧的提交 (会丢失此次提交中的修改内容, 但当前工作区的修改仍保留)
 
-  $ git revert HEAD
+        $ git revert HEAD
 
 2. 修改旧提交 (不能修改已提交文件的内容, 只能加入新的提交文件或修改提交注释)
 
@@ -95,15 +94,15 @@ git checkout — &lt;path&gt;是从暂存区签出内容并恢复. 注意区别.
 
 用法:
 
-git reset 前一个SHA值(不要reset你要rollback的那个commit，是没用的)
-
-git reset –soft HEAD^: 退到上上一个commit的状态, stage和working tree的修改都会保留<span style="color: #993300;"> (学过指针就知道^是指针前移，同理，^^就是指针前移两位~)</span>
-
-git reset –mixed: 只保留working tree的修改，而stage和commit都会回退
-
-git reset –hard: 不只退回commit, 连working tree的档案内容都会退回上一个commit <span style="color: #993300;">(所以可以用来清理工作区)</span>
-
-git reset &lt;commit&gt; — &lt;path&gt;: 从指定commit中恢复指定&lt;path&gt;到暂存区, 本地修改不丢失
+    git reset 前一个SHA值(不要reset你要rollback的那个commit，是没用的)
+    
+    git reset –soft HEAD^: 退到上上一个commit的状态, stage和working tree的修改都会保留<span style="color: #993300;"> (学过指针就知道^是指针前移，同理，^^就是指针前移两位~)</span>
+    
+    git reset –mixed: 只保留working tree的修改，而stage和commit都会回退
+    
+    git reset –hard: 不只退回commit, 连working tree的档案内容都会退回上一个commit <span style="color: #993300;">(所以可以用来清理工作区)</span>
+    
+    git reset &lt;commit&gt; — &lt;path&gt;: 从指定commit中恢复指定&lt;path&gt;到暂存区, 本地修改不丢失
 
 TIP：
 
@@ -151,7 +150,7 @@ A:
 
 1. git reset. 但是已经PUSH的不能恢复
 
-        $git reset &lt;commit&gt; — &lt;path&gt;
+        $git reset <commit> — <path>
 
     从指定commit中恢复指定&lt;path&gt;到暂存区, 同时本地修改不会丢失.
     
