@@ -151,18 +151,18 @@ A:
 
 1. git reset. 但是已经PUSH的不能恢复
 
-$git reset &lt;commit&gt; — &lt;path&gt;
+        $git reset &lt;commit&gt; — &lt;path&gt;
 
-从指定commit中恢复指定&lt;path&gt;到暂存区, 同时本地修改不会丢失.
-
-这样再次commit之后HEAD中保存的内容实际上是暂存区已恢复的内容.
+    从指定commit中恢复指定&lt;path&gt;到暂存区, 同时本地修改不会丢失.
+    
+    这样再次commit之后HEAD中保存的内容实际上是暂存区已恢复的内容.
 
 2. git revert, 这样做会导致b的本地修改丢失.
 
-1).$git revert -n &lt;commit&gt;
-
-2).$ git reset HEAD a.txt
-
-3).$ git checkout — a.txt
+    1).$git revert -n &lt;commit&gt;
+    
+    2).$ git reset HEAD a.txt
+    
+    3).$ git checkout — a.txt
 
 思考: 这两种方法为什么能实现这样的结果.
