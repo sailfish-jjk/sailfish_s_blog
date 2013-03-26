@@ -94,15 +94,11 @@ git checkout — &lt;path&gt;是从暂存区签出内容并恢复. 注意区别.
 
 用法:
 
-    git reset 前一个SHA值(不要reset你要rollback的那个commit，是没用的)
-    
-    git reset –soft HEAD^: 退到上上一个commit的状态, stage和working tree的修改都会保留<span style="color: #993300;"> (学过指针就知道^是指针前移，同理，^^就是指针前移两位~)</span>
-    
-    git reset –mixed: 只保留working tree的修改，而stage和commit都会回退
-    
-    git reset –hard: 不只退回commit, 连working tree的档案内容都会退回上一个commit <span style="color: #993300;">(所以可以用来清理工作区)</span>
-    
-    git reset &lt;commit&gt; — &lt;path&gt;: 从指定commit中恢复指定&lt;path&gt;到暂存区, 本地修改不丢失
+*   git reset 前一个SHA值(不要reset你要rollback的那个commit，是没用的)
+*   git reset –soft HEAD^: 退到上上一个commit的状态, stage和working tree的修改都会保留<span style="color: #993300;"> (学过指针就知道^是指针前移，同理，^^就是指针前移两位~)</span>
+*   git reset –mixed: 只保留working tree的修改，而stage和commit都会回退
+*   git reset –hard: 不只退回commit, 连working tree的档案内容都会退回上一个commit <span style="color: #993300;">(所以可以用来清理工作区)</span>
+*   git reset &lt;commit&gt; — &lt;path&gt;: 从指定commit中恢复指定&lt;path&gt;到暂存区, 本地修改不丢失
 
 TIP：
 
