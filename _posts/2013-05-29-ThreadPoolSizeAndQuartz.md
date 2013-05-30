@@ -22,6 +22,78 @@ category: notes
 
 队列大小可以量化以后，就可以根据部署环境的实际情况进行队列大小的设置了。
 
+**Spring Quartz**
 
+ Quartz 调度器以多线程的方式执行调度任务JobDetail,最大线程池大小为maxPoolSize，也就是说若调度器中已有maxPoolSize个Job在工作（线程没有结束），那么即使有JobDetail到了被触发的时间，新的JobDetail不会被执行，也就是说阻塞的条件是，调度器中正在运行的JobDetail数量达到了设定值maxPoolSize。
+
+        <!-- 线程执行器配置，用于任务注册  -->
+        <bean id="executor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+            <property name="corePoolSize" value="6" />
+            <property name="maxPoolSize" value="16" />
+            <property name="queueCapacity" value="500" />
+        </bean>
+
+这个executor里就有上文提到过的threadPoolExecutor，相当于创建了一个大小为500的LinkedBlockingQueue作为任务队列，线程池的线程大小由corePoolSize和maxPoolSize决定。看下代码就明白了。
+
+    public class ThreadPoolTaskExecutor extends ExecutorConfigurationSupport implements SchedulingTaskExecutor {
+        private final Object poolSizeMonitor = new Object();
+        private int corePoolSize = 1;
+        private int maxPoolSize = Integer.MAX_VALUE;
+        private int keepAliveSeconds = 60;
+        private boolean allowCoreThreadTimeOut = false;
+        private int queueCapacity = Integer.MAX_VALUE;
+        //这个就是核心的那个线程池
+        private ThreadPoolExecutor threadPoolExecutor;
+        ...
+        /**
+        * 初始化线程池
+        *
+        **/
+        protected ExecutorService initializeExecutor(
+            ThreadFactory threadFactory, RejectedExecutionHandler rejectedExecutionHandler) {
+
+            BlockingQueue<Runnable> queue = createQueue(this.queueCapacity);
+            ThreadPoolExecutor executor  = new ThreadPoolExecutor(
+                    this.corePoolSize, this.maxPoolSize, this.keepAliveSeconds, TimeUnit.SECONDS,
+                    queue, threadFactory, rejectedExecutionHandler);
+            if (this.allowCoreThreadTimeOut) {
+                executor.allowCoreThreadTimeOut(true);
+            }
+
+            this.threadPoolExecutor = executor;
+            return executor;
+        }
+
+        /**
+        * 初始化队列
+        */
+        protected BlockingQueue<Runnable> createQueue(int queueCapacity) {
+            if (queueCapacity > 0) {
+                return new LinkedBlockingQueue<Runnable>(queueCapacity);
+            }
+            else {
+                return new SynchronousQueue<Runnable>();
+            }
+        }
+    }
+
+我的job由于生产者生产速度远大于消费者消费速度，导致任务队列爆满被阻塞。此时生产者还在继续发送消息，于是执行了异常策略，抛出异常。然后又由于很无脑的把线程数开的太大，资源耗尽，测试服务器跑挂……
+
+
+**举个栗子：**
+
+配置：JobA 触发时间为 每秒运行一次，每个Job执行时间为30秒
+
+运行：
+
+1、 10个JobA将连续启动
+
+2、 到第10个JobA启动后，线程池中所有线程被耗尽，调度器出现了阻塞，即没有新的JobA启动，尽管设置为每秒执行一次。
+
+3、 30秒后，将有1个以上JobA执行完毕，在短时间内，新的10个JobA又被启动，再次进入2的阻塞状态
+
+    2状态可以称做调度器阻塞状态，没有新的Job能执行，导致一些诸如定时读取数据的操作无法继续下去。除非有JobA执行完毕，新的JobA才能被执行。实际运行中，假设调度器中有一个JobA线程的执行时间大于两次启动间隔，则经过若干次操作后，将耗尽所有10个线程资源，导致其他的调度任务阻塞。
+
+后来查了一下，推荐线程数 =  CPU核数 + 1 （计算型任务） 或者 推荐线程数 = CPU核数 * 请求的等待时间（WT）与服务时间（ST）之间的比例（I/O边界型任务）。[地址](http://dongdong1314.blog.51cto.com/389953/225380)
 
 --EOF--
