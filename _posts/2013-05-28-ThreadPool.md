@@ -33,14 +33,14 @@ JDK 1.5以后，Java提供一个线程池ThreadPoolExecutor类。下面从构造
 
 参数名、说明：
 
-|参数名|说明|
-|------|----|
-|corePoolSize|线程池维护线程的最少数量|
-|maximumPoolSize|线程池维护线程的最大数量|
-|keepAliveTime|线程池维护线程所允许的空闲时间|
-|workQueue|任务队列，用来存放我们所定义的任务处理线程|
-|threadFactory|线程创建工厂|
-|handler|线程池对拒绝任务的处理策略|
+参数名|说明
+------|----
+corePoolSize|线程池维护线程的最少数量
+maximumPoolSize|线程池维护线程的最大数量
+keepAliveTime|线程池维护线程所允许的空闲时间
+workQueue|任务队列，用来存放我们所定义的任务处理线程
+threadFactory|线程创建工厂
+handler|线程池对拒绝任务的处理策略
 
 
 ThreadPoolExecutor将根据*corePoolSize*和*maximumPoolSize*设置的边界自动调整池大小。当新任务在方法execute(Runnable) 中提交时， 如果运行的线程少于corePoolSize，则创建新线程来处理请求。
