@@ -19,7 +19,7 @@
 	{{ content }}
 
 	<footer>
-		<p>&copy; Since 2012 <a href="http://github.com/mytharcher" target="_blank">github.com/mytharcher</a></p>
+		<p>&copy; Since 2012 <a href="http://github.com/dylanvivi" target="_blank">github.com/dylanvivi</a></p>
 	</footer>
 </div>
 
