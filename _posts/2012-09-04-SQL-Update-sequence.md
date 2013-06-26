@@ -9,8 +9,8 @@ title : SQL UPDATE语句执行顺序问题
 
 	UPDATE DT_xms_salebill_daily 
 	SET 
-		saleprice = (case when mediatype = 2 then ? else ? end ) , 
-		saleamount = (salprice * feenum)  
+	saleprice = (case when mediatype = 2 then ? else ? end ) , 
+	saleamount = (salprice * feenum)  
 	WHERE companyname = ?
 	
 SQL这样写会出现saleprice列更新，但是saleamount没有更新。再执行一次saleamount才更新。于是考虑是否是 update 执行顺序问题，google之，得到如下结论:
@@ -25,7 +25,7 @@ SQL这样写会出现saleprice列更新，但是saleamount没有更新。再执�
 
 	UPDATE DT_xms_salebill_daily 
 	SET 
-		saleprice = (case when mediatype = 2 then ? else ? end ) 
+	saleprice = (case when mediatype = 2 then ? else ? end ) 
 	WHERE companyname = ?
 	
 	UPDATE DT_xms_salebill_daily 

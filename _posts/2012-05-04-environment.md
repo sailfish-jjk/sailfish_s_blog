@@ -29,7 +29,7 @@ oracle也不能用了，每次重配都要各种百度google，主要原因还�
 
 Tips: plsql连接远程数据库
 
-      sever =
+    sever =
     (DESCRIPTION =
     (ADDRESS_LIST =
     (ADDRESS = (PROTOCOL = TCP)(HOST = HOSTIP)(PORT = 1521))
@@ -46,15 +46,15 @@ Tips: plsql连接远程数据库
 
 SQL关键字全部大写
 
-Tools –> Preferences –> Editor –> Keyword Case –> Uppercase
+    Tools –> Preferences –> Editor –> Keyword Case –> Uppercase
 
 SQL Window中根据光标位置自动选择语句（根据分号分隔语句）
 
-Preferences –> Window Types –> SQL Window –> AutoSelectStatement
+    Preferences –> Window Types –> SQL Window –> AutoSelectStatement
 
 自定义快捷键
 
-Tools –> Preferences –> Key Configuration
+    Tools –> Preferences –> Key Configuration
 
 习惯设置：格式化SQL(format) ctrl+shift+f
 

@@ -20,60 +20,60 @@ title : 学习Maven搭框架ing
 
 1. 建立 maven project：
 
-	new --> project --> maven --> maven project
+		new --> project --> maven --> maven project
 
 2. 选择默认工作目录：
-	
-	Use default Workspace location
+
+		Use default Workspace location
 
 3. 选择项目类型：(这是一个)
 
-	maven-archetype-webapp
+		maven-archetype-webapp
 
 4. 输入groupId & artifactID
 	
 5. 修改pom文件
 
-	<profiles>
-		<profile>
-			<!-- 生产环境 -->
-			<id>product</id>
-			<properties>
-				<package.environment>product</package.environment>
-			</properties>
-		</profile>
-		<profile>
-			<!-- 开发环境 -->
-			<id>dev</id>
-			<properties>
-				<package.environment>dev</package.environment>
-			</properties>
-		</profile>
-	</profiles>
-		
-	<!-- Profiles是maven的一个很关键的术语：profile是用来定义一些在build lifecycle中使用的 
-	environmental variations，profile可以设置成在不同的环境下激活不同的profile（例如：不同
-	的OS激活不同的profile，不同的JVM激活不同的profile，不同的dabase激活不同的profile等等）
-	-->
+		<profiles>
+			<profile>
+				<!-- 生产环境 -->
+				<id>product</id>
+				<properties>
+					<package.environment>product</package.environment>
+				</properties>
+			</profile>
+			<profile>
+				<!-- 开发环境 -->
+				<id>dev</id>
+				<properties>
+					<package.environment>dev</package.environment>
+				</properties>
+			</profile>
+		</profiles>
+			
+		<!-- Profiles是maven的一个很关键的术语：profile是用来定义一些在build lifecycle中使用的 
+		environmental variations，profile可以设置成在不同的环境下激活不同的profile（例如：不同
+		的OS激活不同的profile，不同的JVM激活不同的profile，不同的dabase激活不同的profile等等）
+		-->
 
-	<!-- 一些项目骨架的配置 -->
-	<finalName>springmybatis</finalName>
-	<sourceDirectory>src/main/java</sourceDirectory>
-	<testSourceDirectory>src/test/java</testSourceDirectory>
-	<resources>
-		<resource>
-			<directory>src/main/resources</directory>
-			<filtering>true</filtering>
-		</resource>
-	</resources>
-	<testResources>
-		<testResource>
-			<directory>src/test/resources</directory>
-			<filtering>true</filtering>
-		</testResource>
-	</testResources>
-	<outputDirectory>webapp/WEB-INF/classes</outputDirectory>
-	<testOutputDirectory>target/test-classes</testOutputDirectory>
+		<!-- 一些项目骨架的配置 -->
+		<finalName>springmybatis</finalName>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<filtering>true</filtering>
+			</testResource>
+		</testResources>
+		<outputDirectory>webapp/WEB-INF/classes</outputDirectory>
+		<testOutputDirectory>target/test-classes</testOutputDirectory>
 
 6. 新建source folder : `src/main/java`
 
