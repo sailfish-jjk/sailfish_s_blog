@@ -1,4 +1,5 @@
-markdown: rdiscount
+#markdown: rdiscount
+markdown: kramdown
 pygments: true
 safe: false
 permalink: /posts/:title.html
