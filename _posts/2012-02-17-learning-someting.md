@@ -24,62 +24,62 @@ service层处理业务逻辑,不做数据检验*
 
 * 刚学了一招转换的超级好使啊啊啊!!!开心ing...遇到数据库存的字段和实体类里面不一样,需要进行转换的时候.可以再实体类里进行get\set的转换.
 
-	*例如:这个DtXmsMtN实体类里,status是数据库存的字段,其中Y表示成功,其他表示失败...我想把它翻译成中文,有两个地方可以修改,一个是实体类初始化setStatus()时, 对这个自定义的statusStr进行翻译. 另一种是在getStatusStr时, 对status进行判断并翻译. 如下...*
+*例如:这个DtXmsMtN实体类里,status是数据库存的字段,其中Y表示成功,其他表示失败...我想把它翻译成中文,有两个地方可以修改,一个是实体类初始化setStatus()时, 对这个自定义的statusStr进行翻译. 另一种是在getStatusStr时, 对status进行判断并翻译. 如下...*
 
-	public class DtXmsMtN {
+		public class DtXmsMtN {
 
-		@Column(value = "STATUS")
-		private String status;
+			@Column(value = "STATUS")
+			private String status;
 
-		private String statusStr;
+			private String statusStr;
 
-		public String getStatus() {
-			return status;
+			public String getStatus() {
+				return status;
+			}
+
+			public void setStatus(String status) {
+				this.status = status;
+			}
+			
+			public String getStatusStr() {
+				if (status.equals("Y"))
+					statusStr = "成功";
+				else
+					statusStr="失败";
+				return statusStr;
+			}
 		}
 
-		public void setStatus(String status) {
-			this.status = status;
-		}
-		
-		public String getStatusStr() {
-			if (status.equals("Y"))
-				statusStr = "成功";
-			else
-				statusStr="失败";
-			return statusStr;
-		}
-	}
-
-	*另外, 大牛教育说, 不要为了一时的小省事儿而去丢掉数据库中的原始信息. 除非你确定以后再也不会用它. 否则不要直接去修改实体类中status的值, 而应该是建一个显示值来显示它~ so... 学习了~*
+*另外, 大牛教育说, 不要为了一时的小省事儿而去丢掉数据库中的原始信息. 除非你确定以后再也不会用它. 否则不要直接去修改实体类中status的值, 而应该是建一个显示值来显示它~ so... 学习了~*
 
 * 写帮助类的时候应该考虑的更完善一些,满足大部分需求... 不可以修改帮助类...(既然打算把它做成Util了, 就要做成通用的~ 动不动就修改, 叫啥通用... )  具体可以参考一下修改后的ExcelUtil~ 
 
 * 写sql的时候只有要连表才用join,否则小表用in,大表用exsits~
 
-	-- EXISTS强调的是是否返回结果集 (一个布尔值) 只要EXISTS引导的子句有结果集返回, 那么EXISTS这个条件就算成立了. 
-	-- 所以EXISTS子句不在乎返回什么, 而是在乎是不是有结果集返回. 
+		-- EXISTS强调的是是否返回结果集 (一个布尔值) 只要EXISTS引导的子句有结果集返回, 那么EXISTS这个条件就算成立了. 
+		-- 所以EXISTS子句不在乎返回什么, 而是在乎是不是有结果集返回. 
 
-	SELECT channel,round(count(1)* 0.1131) mdfail  FROM WAAS_VIEW_USER_RESULT a 
-	WHERE is_old = 1 AND not EXISTS (
-	SELECT msgid
-	  FROM DT_XMS_MT b
-	 WHERE EXISTS
-		   (SELECT MSGID FROM WAAS_VIEW_USER_RESULT WHERE STATUS = 'SUCCESS' AND msgid = b.msgid)
-	AND msgid = a.msgid)
-	   GROUP BY channel;
+		SELECT channel,round(count(1)* 0.1131) mdfail  FROM WAAS_VIEW_USER_RESULT a 
+		WHERE is_old = 1 AND not EXISTS (
+		SELECT msgid
+		  FROM DT_XMS_MT b
+		 WHERE EXISTS
+			   (SELECT MSGID FROM WAAS_VIEW_USER_RESULT WHERE STATUS = 'SUCCESS' AND msgid = b.msgid)
+		AND msgid = a.msgid)
+		   GROUP BY channel;
 
-	-- PS: 对比一下in, in 引导的子句只能返回一个字段, 比如楼上那句用in来写就是这样 :
+		-- PS: 对比一下in, in 引导的子句只能返回一个字段, 比如楼上那句用in来写就是这样 :
 
-	SELECT channel,round(count(1)* 0.1131) mdfail  FROM WAAS_VIEW_USER_RESULT a 
-	WHERE is_old = 1 AND a.msgid NOT IN (
-	SELECT msgid
-	  FROM DT_XMS_MT b
-	 WHERE b.msgid IN 
-		   (SELECT MSGID FROM WAAS_VIEW_USER_RESULT WHERE STATUS = 'SUCCESS')
-	)
-	GROUP BY channel;
-	
-	-- 但是效率真心很低
+		SELECT channel,round(count(1)* 0.1131) mdfail  FROM WAAS_VIEW_USER_RESULT a 
+		WHERE is_old = 1 AND a.msgid NOT IN (
+		SELECT msgid
+		  FROM DT_XMS_MT b
+		 WHERE b.msgid IN 
+			   (SELECT MSGID FROM WAAS_VIEW_USER_RESULT WHERE STATUS = 'SUCCESS')
+		)
+		GROUP BY channel;
+		
+		-- 但是效率真心很低
 		
 * Map<String,Object>在连表的时候真的很好用... 
 	
@@ -145,7 +145,7 @@ service层处理业务逻辑,不做数据检验*
 		
 * 巧用HashSet:
 
-	其实是对HashSet性质的一种巧妙的应用~ 不能不崇拜大牛啊... 好吧,还是我自己没见识~ 代码说明一切.
+其实是对HashSet性质的一种巧妙的应用~ 不能不崇拜大牛啊... 好吧,还是我自己没见识~ 代码说明一切.
 
 	/**
 	 * 计算群组会员数（去重后）
@@ -176,12 +176,10 @@ service层处理业务逻辑,不做数据检验*
 		return unique.size();
 	} 
 		
-	上面就是利用了HashSet的性质, 顺道查了一下[HashSet的实现](http://alex09.iteye.com/blog/539549).
+上面就是利用了HashSet的性质, 顺道查了一下[HashSet的实现](http://alex09.iteye.com/blog/539549).
 	
-		HashSet 的实现其实非常简单，它只是封装了一个 HashMap 对象来存储所有的集合元素，
-		所有放入 HashSet 中的集合元素实际上由 HashMap 的 key 来保存，而 HashMap 的 value 
-		则存储了一个 PRESENT，它是一个静态的 Object 对象。 
+HashSet 的实现其实非常简单，它只是封装了一个 HashMap 对象来存储所有的集合元素，所有放入 HashSet 中的集合元素实际上由 HashMap 的 key 来保存，而 HashMap 的 value 则存储了一个 PRESENT，它是一个静态的 Object 对象。 
 		
-	巧用这件事儿还真得从性质入手, 但是光知道性质还不好使. 重点是灵活运用~ 要是实在想不到怎么用也行, 那就看到了别人的代码记下来. 然后运用~~ 啦啦~~我又好开心...
+巧用这件事儿还真得从性质入手, 但是光知道性质还不好使. 重点是灵活运用~ 要是实在想不到怎么用也行, 那就看到了别人的代码记下来. 然后运用~~ 啦啦~~我又好开心...
 	
 {% include references.md %}
