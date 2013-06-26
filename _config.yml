@@ -1,5 +1,6 @@
 #markdown: rdiscount
-markdown: kramdown
+#markdown: kramdown
+markdown: redcarpet
 pygments: true
 safe: false
 permalink: /posts/:title.html
