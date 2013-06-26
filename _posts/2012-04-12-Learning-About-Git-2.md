@@ -17,13 +17,13 @@ master为默认本地分支
 
 <span style="color: #993300;">(上述语句：把本地master分支push到远程orign分支上，以后版本控制中，应用多分支时应注意分支的切换及合并)</span>
 
-可手动指定, 也可在gitconfig中指定默认远程配置,&nbsp; 即可直接使用git push
+可手动指定, 也可在gitconfig中指定默认远程配置, 即可直接使用git push
 
 *   获取更新
 
-1. git fetch &amp; git merge
+1. git fetch & git merge
 
-    git fetch [remote-name] 从远程仓库中拉取所有你本地仓库中还没有的数据.
+        git fetch [remote-name]  #从远程仓库中拉取所有你本地仓库中还没有的数据.
     
     需要记住，fetch 命令只是将远端的数据拉到本地仓库，并不自动合并到当前工作分支，只有当你确实准备好了，才能通过执行git merge命令合并
     
@@ -31,7 +31,7 @@ master为默认本地分支
 
 2. git pull (= git fetch + git merge)
 
-    git pull命令相当于git fetch + git merge, 即从远程仓库中拉取所有你本地仓库中还没有的数据, 并自动合并到当前工作分支.
+        git pull命令相当于git fetch + git merge, 即从远程仓库中拉取所有你本地仓库中还没有的数据, 并自动合并到当前工作分支.
 
 **处理冲突**
 
@@ -39,7 +39,7 @@ master为默认本地分支
 
 git fetch
 
-git merge origin/master&nbsp; &lt;git status -r 即可查看本地对应的remote branch&gt;
+    git merge origin/master <git status -r 即可查看本地对应的remote branch>
 
 a) 修改内容未提交时, 会提示不能merge, 需要先commit或移除文件或恢复修改 <span style="color: #993300;">(这个也是为啥我说在fetch前要先commit的原因~保证本地修改不被覆盖嘛，还有就是不提交git不让merge的~不过这样做的前提一定是在开发前已经更新了最新版本，否则很容易用本地老版本文件覆盖了别人的修改，最近开发中就总遇到这种乌龙事件……)</span>
 
@@ -49,7 +49,7 @@ b) 如果有冲突, 并且不能自动合并, 会提示冲突, 手工编辑解�
 
 还原本地修改分两种情况
 
-a) 修改未提交: git checkout HEAD &lt;path&gt;<span style="color: #993300;">&nbsp;(在本地修改了代码只是为了测试用，后并不想保留，此情况直接checkout就好了)</span>
+a) 修改未提交: git checkout HEAD `<path>`<span style="color: #993300;">&nbsp;(在本地修改了代码只是为了测试用，后并不想保留，此情况直接checkout就好了)</span>
 
 b) 修改已提交: git reset –hard HEAD 还原至上一个提交<span style="color: #993300;"> (本地修改了某个类，然后发现改错了……还原至上一次提交)</span>
 
@@ -64,9 +64,9 @@ b) 修改已提交: git reset –hard HEAD 还原至上一个提交<span style="
 
 这条件命令会把你工作目录中所有未提交的内容清空(当然这不包括未置于版控制下的文件 untracked files)
 
-也可用git checkout HEAD &lt;path&gt;来恢复文件或目录, 命令将从HEAD中签出并且把它恢复成未修改时的样子
+也可用git checkout HEAD `<path>`来恢复文件或目录, 命令将从HEAD中签出并且把它恢复成未修改时的样子
 
-git checkout — &lt;path&gt;是从暂存区签出内容并恢复. 注意区别. <span style="color: #993300;">&lt;&lt;这句很关键</span>
+git checkout —`<path>` 是从暂存区签出内容并恢复. 注意区别. <span style="color: #993300;">&lt;&lt;这句很关键</span>
 
 <span style="color: #993300;">(此处这个HEAD为每次提交的SHA值，也就是说，想要确定还原到某次提交，用该提交的SHA值替代HAED即可)</span>
 
@@ -146,7 +146,7 @@ A:
 
 1. git reset. 但是已经PUSH的不能恢复
 
-    $git reset <commit> — <path>
+        $git reset <commit> — <path>
 
     从指定commit中恢复指定&lt;path&gt;到暂存区, 同时本地修改不会丢失.
     
@@ -154,10 +154,10 @@ A:
 
 2. git revert, 这样做会导致b的本地修改丢失.
 
-    1).$git revert -n &lt;commit&gt;
-    
-    2).$ git reset HEAD a.txt
-    
-    3).$ git checkout — a.txt
+        1).$git revert -n <commit>
+        
+        2).$ git reset HEAD a.txt
+        
+        3).$ git checkout — a.txt
 
 思考: 这两种方法为什么能实现这样的结果.

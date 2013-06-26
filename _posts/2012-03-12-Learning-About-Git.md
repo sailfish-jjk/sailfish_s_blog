@@ -43,7 +43,7 @@ category: notes
 
 **Git常用操作：**
 
-流程：取代码 → 每次工作前更新代码到最新版本 → 修改代码 → 提交代码到服务器 <span style="color: #993300;">&nbsp;(这个应该是要养成的习惯吧，否则很容易造成冲突^^)</span>
+流程：取代码 → 每次工作前更新代码到最新版本 → 修改代码 → 提交代码到服务器 <span style="color: #993300;"> (这个应该是要养成的习惯吧，否则很容易造成冲突^^)</span>
 
 _配置git的用户信息_
 
@@ -61,7 +61,7 @@ _查看配置信息_
 
 要查看已有的git配置信息, 可以使用 git config –list命令，或者查看具体属性值.
 
-    $git config user.name&nbsp; 查看配置的用户名称
+    $git config user.name  #查看配置的用户名称
 
 **创建一个版本库：git-init-db**
 
@@ -91,8 +91,8 @@ _查看配置信息_
 
 存在以下三种状态
 
-*   Changes to be commited&nbsp; &lt;已暂存尚未提交&gt;
-*   Changes not staged for commit&nbsp; &lt;已跟踪的文件修改后尚未暂存&gt;
+*   Changes to be commited >> 已暂存尚未提交 <<
+*   Changes not staged for commit  >>已跟踪的文件修改后尚未暂存 <<
 *   Untracked files <span style="color: #993300;">(没有列入版本控制的文件们，通常是在项目里新建了文件就是这个状态。此时对该文件进行的任何操作是不会受版本控制影响的~也就是说项目中的其他同事无法看到，需add进暂存区方可)</span>
 
 
@@ -108,7 +108,7 @@ _git log查看提交历史_
 
 包含以下信息内容:
 
-1.  commit hash(SHA-1 校验和)<span style="color: #993300;">&nbsp; (这个hash值可以看做此次commit的唯一标示，以后进行reset、checkout的时候可以通过此id定位到具体哪次提交)</span>
+1.  commit hash(SHA-1 校验和)<span style="color: #993300;"> (这个hash值可以看做此次commit的唯一标示，以后进行reset、checkout的时候可以通过此id定位到具体哪次提交)</span>
 2.  作者的名字和电子邮件地址
 3.  提交时间
 4.  最后缩进一个段落显示提交说明<span style="color: #993300;"> (也就是每次提交时的那个附注信息~应该养成好习惯把提交信息说明清楚，以方便进行版本控制)</span>
@@ -120,6 +120,6 @@ _git log查看提交历史_
 
 **Git的基本操作：**
 
-*   git add &nbsp;将文件加入到暂存区域<span style="color: #993300;"> (只有暂存区的文件才会被提交哦~)</span>
-*   git commit &nbsp; &nbsp;将暂存区域的文件提交到版本库, 加上-a选项则将已跟踪但未暂存的文件也包括在内.<span style="color: #993300;"> (通过-a这个选项可以省去了add这个命令哦~不过未列入版本控制的文件&lt;Untracked files&gt;不在此列中哦~)</span>
-*   git rm &nbsp;&nbsp; 删除文件. –cached选项只删除索引, 保留文件, 即恢复成untracked状态
+*   git add  将文件加入到暂存区域<span style="color: #993300;"> (只有暂存区的文件才会被提交哦~)</span>
+*   git commit  将暂存区域的文件提交到版本库, 加上-a选项则将已跟踪但未暂存的文件也包括在内.<span style="color: #993300;"> (通过-a这个选项可以省去了add这个命令哦~不过未列入版本控制的文件`<Untracked files>`不在此列中哦~)</span>
+*   git rm   删除文件. –cached选项只删除索引, 保留文件, 即恢复成untracked状态
