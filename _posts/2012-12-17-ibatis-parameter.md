@@ -17,22 +17,21 @@ category: problems
 
 1. SQL :
 
-
-	<select id="selectMetaMandao"  parameterClass="java.util.HashMap" resultMap="WaasmetaMandaoMap" >  
-		SELECT $subCategory$ rchannel,sum(mandao) mandao from
-		( SELECT nvl(channel,'-') channel,ROUND(count(1)*0.1131) mandao  FROM WAAS_VIEW_USER_RESULT a 
-		AND not EXISTS (
-		SELECT msgid
-		  FROM DT_XMS_MT b
-		 WHERE EXISTS
-			   (SELECT MSGID FROM WAAS_VIEW_USER_RESULT WHERE STATUS = 'SUCCESS' AND msgid = b.msgid)
-		AND msgid = a.msgid)
-		   GROUP BY channel) d LEFT JOIN waas_channel_summary c ON d.channel = c.original_channel 
-		<isNotEmpty property="channel">
-				WHERE c.original_channel LIKE '%'||#channel#||'%' 
-		 </isNotEmpty>
-		   GROUP BY $subCategory$
-	</select>
+		<select id="selectMetaMandao"  parameterClass="java.util.HashMap" resultMap="WaasmetaMandaoMap" >  
+			SELECT $subCategory$ rchannel,sum(mandao) mandao from
+			( SELECT nvl(channel,'-') channel,ROUND(count(1)*0.1131) mandao  FROM WAAS_VIEW_USER_RESULT a 
+			AND not EXISTS (
+			SELECT msgid
+			  FROM DT_XMS_MT b
+			 WHERE EXISTS
+				   (SELECT MSGID FROM WAAS_VIEW_USER_RESULT WHERE STATUS = 'SUCCESS' AND msgid = b.msgid)
+			AND msgid = a.msgid)
+			   GROUP BY channel) d LEFT JOIN waas_channel_summary c ON d.channel = c.original_channel 
+			<isNotEmpty property="channel">
+					WHERE c.original_channel LIKE '%'||#channel#||'%' 
+			 </isNotEmpty>
+			   GROUP BY $subCategory$
+		</select>
 
 
 2. 代码 : 
