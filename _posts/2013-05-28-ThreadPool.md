@@ -28,8 +28,8 @@ category: notes
 
 JDK 1.5以后，Java提供一个线程池ThreadPoolExecutor类。下面从构造函数来分析一下这个线程池的使用方法。
 
-		public ThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit,
-            BlockingQueue<Runnable> workQueue, ThreadFactory threadFactory, RejectedExecutionHandler handler);
+	public ThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit,
+        BlockingQueue<Runnable> workQueue, ThreadFactory threadFactory, RejectedExecutionHandler handler);
 
 参数名、说明：
 
@@ -63,36 +63,36 @@ ThreadPoolExecutor将根据*corePoolSize*和*maximumPoolSize*设置的边界自�
 
 1）CallerRunsPolicy：线程调用运行该任务的 execute 本身。此策略提供简单的反馈控制机制，能够减缓新任务的提交速度。
 
-        public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {
-             if (!e.isShutdown()) {
-                 r.run();
-            }
+    public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {
+         if (!e.isShutdown()) {
+             r.run();
         }
+    }
 
 这个策略显然不想放弃执行任务。但是由于池中已经没有任何资源了，那么就直接使用调用该execute的线程本身来执行。（开始我总不想丢弃任务的执行，但是对某些应用场景来讲，很有可能造成当前线程也被阻塞。如果所有线程都是不能执行的，很可能导致程序没法继续跑了。需要视业务情景而定吧。）
 
 2）AbortPolicy：处理程序遭到拒绝将抛出运行时 RejectedExecutionException
 
-        public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {
-              throw new RejectedExecutionException();
-        }
+    public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {
+          throw new RejectedExecutionException();
+    }
 
 这种策略直接抛出异常，丢弃任务。（jdk默认策略，队列满并线程满时直接拒绝添加新任务，并抛出异常，所以说有时候放弃也是一种勇气，为了保证后续任务的正常进行，丢弃一些也是可以接收的，记得做好记录）
 
 3）DiscardPolicy：不能执行的任务将被删除
 
-          public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {}
+    public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {}
 
 这种策略和AbortPolicy几乎一样，也是丢弃任务，只不过他不抛出异常。
 
 4）DiscardOldestPolicy：如果执行程序尚未关闭，则位于工作队列头部的任务将被删除，然后重试执行程序（如果再次失败，则重复此过程）
 
-        public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {
-            if (!e.isShutdown()) {
-                e.getQueue().poll();
-                e.execute(r);
-            }
+    public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {
+        if (!e.isShutdown()) {
+            e.getQueue().poll();
+            e.execute(r);
         }
+    }
 
 该策略就稍微复杂一些，在pool没有关闭的前提下首先丢掉缓存在队列中的最早的任务，然后重新尝试运行该任务。这个策略需要适当小心。
 
@@ -110,40 +110,40 @@ newCachedThreadPool：创建一个可缓存的线程池。如果线程池的大�
 
 测试类：ThreadPool，创建了一个 newFixedThreadPool，最大线程数为3的固定大小线程池。然后模拟10个任务丢进去。主线程结束后会打印一句：主线程结束。
 
-        public class ThreadPool {
-            public static void main(String[] args) {
-                //创建固定大小线程池
-                ExecutorService executor = Executors.newFixedThreadPool(3);
-                for (int i = 0; i < 10; i++) {
-                    SendNoticeTask task = new SendNoticeTask();
-                    task.setCount(i);
-                    executor.execute(task);
-                }
-                System.out.println("主线程结束");
+    public class ThreadPool {
+        public static void main(String[] args) {
+            //创建固定大小线程池
+            ExecutorService executor = Executors.newFixedThreadPool(3);
+            for (int i = 0; i < 10; i++) {
+                SendNoticeTask task = new SendNoticeTask();
+                task.setCount(i);
+                executor.execute(task);
             }
+            System.out.println("主线程结束");
         }
+    }
 
 测试类：SendNoticeTask，执行任务类，就是打印一句当前线程名+第几个任务。为了方便观察，每个线程执行完以后睡10s。
 
-        public class SendNoticeTask implements Runnable {
+    public class SendNoticeTask implements Runnable {
 
-            private int count;
+        private int count;
 
-            public void setCount(int count) {
-                this.count = count;
-            }
-
-            @Override
-            public void run() {
-                System.out.println(Thread.currentThread().getName() + " start to" + " send " + count + " ...");
-                try {
-                    Thread.currentThread().sleep(10000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                System.out.println("finish " + Thread.currentThread().getName());
-            }
+        public void setCount(int count) {
+            this.count = count;
         }
+
+        @Override
+        public void run() {
+            System.out.println(Thread.currentThread().getName() + " start to" + " send " + count + " ...");
+            try {
+                Thread.currentThread().sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("finish " + Thread.currentThread().getName());
+        }
+    }
 
 执行结果：
 
@@ -173,35 +173,35 @@ newCachedThreadPool：创建一个可缓存的线程池。如果线程池的大�
 
 这个看一下 Executors 类的源码就更明白了。
 
-        public static ExecutorService newFixedThreadPool(int nThreads) {
-            return new ThreadPoolExecutor(nThreads, nThreads,
-                                          0L, TimeUnit.MILLISECONDS,
-                                          new LinkedBlockingQueue<Runnable>());
-        }
+    public static ExecutorService newFixedThreadPool(int nThreads) {
+        return new ThreadPoolExecutor(nThreads, nThreads,
+                                      0L, TimeUnit.MILLISECONDS,
+                                      new LinkedBlockingQueue<Runnable>());
+    }
 
 实际上是创建了一个具有固定线程数、无界队列的 ThreadPoolExecutor。队列无界，不会拒绝任务提交，因此使用此方法时，需要注意资源被耗尽的情况。
 
 测试类：TestThreadPool，采用有界队列（队列大小2），和默认拒绝策略的ThreadPoolExecutor。
 
-        public class TestThreadPool {
+    public class TestThreadPool {
 
-            private static final int corePoolSize = 2;
-            private static final int maximumPoolSize = 4;
-            private static final int keepAliveTime = 1000;
-            private static BlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<Runnable>(2);
+        private static final int corePoolSize = 2;
+        private static final int maximumPoolSize = 4;
+        private static final int keepAliveTime = 1000;
+        private static BlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<Runnable>(2);
 
-            public static void main(String[] args) {
-                //创建线程池
-                ThreadPoolExecutor executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime,
-                        TimeUnit.MILLISECONDS, workQueue);
-                for (int i = 0; i < 10; i++) {
-                    SendNoticeTask task = new SendNoticeTask();
-                    task.setCount(i);
-                    executor.execute(task);
-                }
-                System.out.println("主线程结束:" + Thread.currentThread().getName());
+        public static void main(String[] args) {
+            //创建线程池
+            ThreadPoolExecutor executor = new ThreadPoolExecutor(corePoolSize, maximumPoolSize, keepAliveTime,
+                    TimeUnit.MILLISECONDS, workQueue);
+            for (int i = 0; i < 10; i++) {
+                SendNoticeTask task = new SendNoticeTask();
+                task.setCount(i);
+                executor.execute(task);
             }
+            System.out.println("主线程结束:" + Thread.currentThread().getName());
         }
+    }
 
 执行结果：
 
