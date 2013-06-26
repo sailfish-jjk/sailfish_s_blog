@@ -36,27 +36,27 @@ category: problems
 
 2. 代码 : 
 
-	@RequestMapping("queryMeta.do")
-	public void selectMeta(HttpServletRequest request, HttpServletResponse response) {
-		String channel = request.getParameter("channel");
-		Map<String, Object> param = new HashMap<String, Object>();
-		//以参数方式输出, 相当于一个变量 (活的)
-		param.put("channel", channel); 
-		//以字符串方式输出, 直接输出(死的)
-		param.put("subCategory", channel == null ? "primary_category" : "ORIGINAL_CHANNEL"); 
-		List<WAASUserMOTypeResult> data = wumtService.selectMeta(param);
-		//因为楼上这个List查完之后重新封装的, 所以无序, 要对List里面的对象进行排序, 如下
-		Collections.sort(data, new Comparator<WAASUserMOTypeResult>() {
-			public int compare(WAASUserMOTypeResult o1, WAASUserMOTypeResult o2) {
-				return o2.getShijia() - o1.getShijia(); //排序字段, 倒序
-			}
-		});
-		
-		......
-		
-		renderJson(response, resultJson.toString());
+		@RequestMapping("queryMeta.do")
+		public void selectMeta(HttpServletRequest request, HttpServletResponse response) {
+			String channel = request.getParameter("channel");
+			Map<String, Object> param = new HashMap<String, Object>();
+			//以参数方式输出, 相当于一个变量 (活的)
+			param.put("channel", channel); 
+			//以字符串方式输出, 直接输出(死的)
+			param.put("subCategory", channel == null ? "primary_category" : "ORIGINAL_CHANNEL"); 
+			List<WAASUserMOTypeResult> data = wumtService.selectMeta(param);
+			//因为楼上这个List查完之后重新封装的, 所以无序, 要对List里面的对象进行排序, 如下
+			Collections.sort(data, new Comparator<WAASUserMOTypeResult>() {
+				public int compare(WAASUserMOTypeResult o1, WAASUserMOTypeResult o2) {
+					return o2.getShijia() - o1.getShijia(); //排序字段, 倒序
+				}
+			});
+			
+			......
+			
+			renderJson(response, resultJson.toString());
 
-	}
+		}
 
 
 3. 实现效果:
