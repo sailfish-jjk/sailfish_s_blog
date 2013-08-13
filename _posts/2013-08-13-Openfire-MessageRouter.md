@@ -6,9 +6,7 @@ category: notes
 
 上回的需求是要把消息路由给指定的资源上去，通过增加插件或者是修改源码的方式改变现有路由规则。于是了解了一下Openfire消息路由的实现方式。
 
-主要是这个类·MessageRouter.route·完成的。
-
-源码：
+######主要是这个类·MessageRouter.route·完成的。
 
     public void route(Message packet) {
         if (packet == null) {
@@ -70,7 +68,7 @@ category: notes
         }
     }
 
-做了几件事情：
+######做了几件事情：
 
 1. 拿到了客户端session：ClientSession session = sessionManager.getSession(packet.getFrom()); ClientSession 主要动作是设置用户聊天是设置和使用的策略，获取用户名，获取和设置用户当前状态Presence，当前用户是否为匿名用户。
 
@@ -82,7 +80,7 @@ category: notes
 
 5. 没路由出去的要么返回拒绝消息
 
-RoutingTableImpl.routePacket ：
+######RoutingTableImpl.routePacket ：
 
 1. 如果接受者的domain和服务器的domain一致，就调用routeToLocalDomain
 
@@ -90,7 +88,7 @@ RoutingTableImpl.routePacket ：
 
 3. 除此之外，服务器会调用 routeToRemoteDomain
 
-routeToLocalDomain 源码：
+######routeToLocalDomain 源码：
 
 	private boolean routeToLocalDomain(JID jid, Packet packet,
 			boolean fromServer) {
@@ -146,7 +144,7 @@ routeToLocalDomain 源码：
 	}
 
 
-情况：
+######做了几件事情：
 
 1. 发送给bareJID的情况
 
@@ -162,7 +160,7 @@ routeToLocalDomain 源码：
 
     调用 messageRouter.routingFailed(jid, packet); 路由失败策略
 
-MessageRouter.routingFailed 源码：
+######MessageRouter.routingFailed 源码：
 
     public void routingFailed(JID receipient, Packet packet) {
         // If message was sent to an unavailable full JID of a user then retry using the bare JID
@@ -175,7 +173,7 @@ MessageRouter.routingFailed 源码：
         }
     }
 
-情况：
+######做了几件事情：
 
 1. fullJID路由失败，尝试路由到bare JID;(返回上一步骤，此时就会按路由规则，发送至其他resource)，因此，直接把这里改了，就可以实现发送到指定资源的需求了。但是也会影响到其他正常情况的路由。解决方案思考中……
 
