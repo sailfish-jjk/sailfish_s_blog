@@ -102,7 +102,8 @@ routeToLocalDomain 源码：
 		        routed = routeToBareJID(jid, (Message) packet);
 		    }
 		    else {
-		        throw new PacketException("Cannot route packet of type IQ or Presence to bare JID: " + packet.toXML());
+		        throw new PacketException("Cannot route packet of type IQ 
+                    or Presence to bare JID: " + packet.toXML());
 		    }
 		}
 		else {
@@ -114,7 +115,8 @@ routeToLocalDomain 源码：
 		    if (clientRoute != null) {
 		        if (!clientRoute.isAvailable() && routeOnlyAvailable(packet, fromServer) &&
 		                !presenceUpdateHandler.hasDirectPresence(packet.getTo(), packet.getFrom())) {
-		        	Log.debug("Unable to route packet. Packet should only be sent to available sessions and the route is not available. {} ", packet.toXML());
+		        	Log.debug("Unable to route packet. Packet should only be sent to 
+                        available sessions and the route is not available. {} ", packet.toXML());
 		            routed = false;
 		        }
 		        else {
@@ -148,17 +150,17 @@ routeToLocalDomain 源码：
 
 1. 发送给bareJID的情况
 
-* 找到这个subscriber所对应的所有活的session。
+    找到这个subscriber所对应的所有活的session。
 
-* 从这些session里面选择优先级最高的一个session。调用LocalClientSession的deliver方法把消息发出去。
+    从这些session里面选择优先级最高的一个session。调用LocalClientSession的deliver方法把消息发出去。
 
-* 如果优先级最高的是一组session，那么再根据session的presence信息中的一些状态值排序，排序算法：多个session中，最后一个连接到服务器的session优先级最高。就用这个session把消息发出去。
+    如果优先级最高的是一组session，那么再根据session的presence信息中的一些状态值排序，排序算法：多个session中，最后一个连接到服务器的session优先级最高。就用这个session把消息发出去。
 
 2. 发送给fullJID的情况（即需求中指定resource情况）
 
-* 在 cache 中找fullJID，用户指定资源是否在线，以及是否可用，如果没有，return false.
+    在 cache 中找fullJID，用户指定资源是否在线，以及是否可用，如果没有，return false.
 
-* 调用 messageRouter.routingFailed(jid, packet); 路由失败策略
+    调用 messageRouter.routingFailed(jid, packet); 路由失败策略
 
 MessageRouter.routingFailed 源码：
 
