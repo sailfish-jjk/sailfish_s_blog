@@ -4,17 +4,31 @@ title: Spring 观察者模式
 category: notes
 ---
 
+现有的设计要求当用户发生上行回复时，要进行数据存储工作，并且根据上行内容找出对应的回复内容下发。当用户留下邮箱订阅某类信息时，则定时给该用户邮箱推送该类信息。
+
 根据需求，把用户回复事件作为被观察者，而观察者则是存储、匹配关键词、发邮件等具体的业务。
 
-观察者模式的类图：
+观察者模式类图：
 
+![观察者模式](https://lh6.googleusercontent.com/-fRkMstLYlY8/UoNRXu4nxQI/AAAAAAAABOU/Lp-uP48AdKQ/w595-h276-no/1334812160_1655.jpg)
 
+可以看出，在这个观察者模式的实现里有下面这些角色：
 
-EventListener为JavaSE提供的事件监听者接口，任何自定义的事件监听者都实现了该接口。Spring中提供了该接口的子类ApplicationListener接口。
+*抽象主题（Subject）角色：* 主题角色把所有对观察考对象的引用保存在一个聚集里，每个主题都可以有任何数量的观察者。抽象主题提供一个接口，可以增加和删除观察者对象，主题角色又叫做抽象被观察者（Observable）角色，一般用一个抽象类或者一个接口实现。
 
-EventObject，为JavaSE提供的事件类型基类，任何自定义的事件都继承自该类，例如上图中右侧灰色的各个事件。Spring中提供了该接口的子类ApplicationEvent。
+*抽象观察者（Observer）角色：* 为所有的具体观察者定义一个接口，在得到主题的通知时更新自己。这个接口叫做更新接口。抽象观察者角色一般用一个抽象类或者一个接口实现。在这个示意性的实现中，更新接口只包含一个方法（即Update()方法），这个方法叫做更新方法。
 
-Spring中提供一些Aware相关的接口，BeanFactoryAware、 ApplicationContextAware、ResourceLoaderAware、ServletContextAware等等，其中最常用到的是ApplicationContextAware。实现ApplicationContextAware的Bean，Bean被初始化后，会被注入ApplicationContext的实例。ApplicationContextAware提供了publishEvent()方法，实现Observer(观察者)设计模式的事件传播机，提供了针对Bean的事件传播功能。通过Application.publishEvent方法，用来将事件通知系统内所有的ApplicationListener。
+*具体主题（ConcreteSubject）角色：* 将有关状态存入具体现察者对象；在具体主题的内部状态改变时，给所有登记过的观察者发出通知。具体主题角色又叫做具体被观察者角色（Concrete Observable）。具体主题角色通常用一个具体子类实现。
+
+*具体观察者（ConcreteObserver）角色：* 存储与主题的状态自恰的状态。具体现察者角色实现抽象观察者角色所要求的更新接口，以便使本身的状态与主题的状态相协调。如果需要，具体现察者角色可以保存一个指向具体主题对象的引用。具体观察者角色通常用一个具体子类实现。
+
+从具体主题角色指向抽象观察者角色的合成关系，代表具体主题对象可以有任意多个对抽象观察者对象的引用。之所以使用抽象观察者而不是具体观察者，意味着主题对象不需要知道引用了哪些ConcreteObserver类型，而只知道抽象Observer类型。这就使得具体主题对象可以动态地维护一系列的对观察者对象的引用，并在需要的时候调用每一个观察者共有的Update()方法。
+
+Spring 中的接口 ApplicationListener 是 JDK 中提供事件监听者的接口 EventListener 的子类。任何自定义的事件监听者都实现了 EventListener 接口。
+
+Spring 中提供了 EventObject 接口的子类 ApplicationEvent，EventObject 是 JDK 提供的时间类型基类，自定义类型的事件都继承于该类。
+
+Spring 中提供一些事件发布相关的接口，BeanFactoryAware、 ApplicationContextAware、ResourceLoaderAware、ServletContextAware 等等，其中最常用到的是 ApplicationContextAware。实现 ApplicationContextAware 的 Bean，Bean 被初始化后，会被注入 ApplicationContext 的实例。ApplicationContextAware 提供了 publishEvent()方法，实现 Observer (观察者)设计模式的事件传播机，提供了针对 Bean 的事件传播功能。通过 Application.publishEvent 方法，用来将事件通知系统内所有的ApplicationListener。
 
 Spring事件处理一般过程：
 
@@ -125,7 +139,9 @@ Spring事件处理一般过程：
 
 观察者模式，是一种一对多的关系，即多个观察者监听一个主题。可以很好的解耦业务逻辑，把原来同步的事件变为异步处理，加快了响应速度。并且观察者模式支持广播通讯。被观察者会向所有的登记过的观察者发出通知，更加方便扩展。
 
-PS：好吧，其实没写的东西还挺多，要不是开始写论文了，几乎没时间总结这半年多的学到的东西。本来最初接触观察者模式的时候就想总结一下，结果可恶的拖延症…… 同样被耽搁的还有 maven 的 assembly plugin，用来自定义打包和发布的插件，很好用。以及 JMS ActiveMQ 相关知识点。还有持续集成的应用神马的。一些JS的神奇插件，swfUpload.js、ckeditor.js…… 哈哈，这么一说感觉还学到不少东西。不过不总结和看原理很容易变成一次性知识。
+PS：好吧，本来最初使用观察者模式的时候就想总结一下，结果可恶的拖延症…… 不过我也有偷懒的办法，上述技术是实际应用到的，不过需求大部分就是杜撰出来的啦~ ：） 其实没写的东西还挺多，要不是开始写论文了，几乎没时间总结这半年多的学到的东西。同样被耽搁的还有 maven 的 assembly plugin，用来自定义打包和发布的插件，很好用。以及 JMS ActiveMQ 相关知识点。还有持续集成的应用神马的。一些JS的神奇插件，SWFUpload.js、ckeditor.js…… 
+
+我的论文也从最开始的简单匹配上下行进行回复发送，进化到了用Dubbo架构的SOA式的，可以负载可以异步运用了各种设计模式的CRM营销系统。哈哈，这么一说感觉还学到不少东西。不过不总结和看原理很容易变成一次性知识。
 
 所谓“一次性知识”，就是遇到的时候Google一下，找到解决方法。我觉得判断一个人能力的高低，其中一个因素就是解决问题的能力。面对这种“一次性知识”如果Google不到，怎么样通过分解关键词，找到相关的知识作为下手点，又应该如何设计测试的参数来确定问题出现的原因，逐步找出答案。做完这些，如果加以总结梳理，“一次性知识”就可以变成自己的东西了，如果通过博客或其他方式分享出来，那就更好了。
 
