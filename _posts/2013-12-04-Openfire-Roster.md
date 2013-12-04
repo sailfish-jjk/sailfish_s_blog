@@ -206,5 +206,4 @@ RosterManager的初始化方法里，看到了`RosterEventDispatcher.addListener
 
 	}
 
-以上。
-
+-EOF-
