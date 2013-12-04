@@ -1,8 +1,8 @@
----
+----
 layout: post
 title: Openfire好友关系
 category: notes
----
+----
 
 继续学习Openfire，这次是好友关系的部分。
 
@@ -206,5 +206,5 @@ RosterManager的初始化方法里，看到了`RosterEventDispatcher.addListener
 
 	}
 
--EOF-
+以上。
 
