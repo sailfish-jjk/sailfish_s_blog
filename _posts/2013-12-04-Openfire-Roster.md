@@ -1,8 +1,8 @@
-----
+---
 layout: post
-title: Openfire好友关系
+title: Openfire Roster
 category: notes
-----
+---
 
 继续学习Openfire，这次是好友关系的部分。
 
