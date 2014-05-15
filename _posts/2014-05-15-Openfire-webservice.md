@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Openfire发布webservice接口
-category: notes---
+category: notes
+---
 
 之前碰到有人问怎么把openfire的接口发布成webservice，由于我们项目中采用的是Dubbo形式，还真就没实际操作过。不过估计原理差不多，得空研究一下。
 
