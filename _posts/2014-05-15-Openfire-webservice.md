@@ -51,7 +51,8 @@ webservice服务
   
 输出：
 
-![image](/assets/post-images/2014-05-15-30d615e1-9506-437b-ffe2-c94534bf3f94.png)
+![image](/assets/post-images/2014-05-15-b26f189f-1069-4ef0-d599-60db23eadace.png)
+
 
 
 
