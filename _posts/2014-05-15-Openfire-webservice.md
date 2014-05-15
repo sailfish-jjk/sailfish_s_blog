@@ -20,9 +20,13 @@ category: notes
     	XFire xfire = XFireFactory.newInstance().getXFire();
     	ObjectServiceFactory serviceFactory = new ObjectServiceFactory(xfire.getTransportManager());
     	Service service = serviceFactory.create(OpenfireWebService.class);
+    	//设置发布接口的实现类
     	service.setProperty(ObjectInvoker.SERVICE_IMPL_CLASS, OpenfireWebServiceImpl.class);
+    	//接口注入到webservice中，发布该接口
     	xfire.getServiceRegistry().register(service);
+    	//新建服务器
     	XFireHttpServer server = new XFireHttpServer();
+    	//设置监听端口
     	server.setPort(8190);
     	try {
     		server.start();
@@ -69,7 +73,6 @@ webservice服务
 输出：
 
 ![image](/assets/post-images/2014-05-15-b26f189f-1069-4ef0-d599-60db23eadace.png)
-
 
 
 
