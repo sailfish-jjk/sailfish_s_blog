@@ -10,12 +10,14 @@ category: notes---
     //加载数据集成模块。该模块为外部扩展模块，可能会不存在。
     loadModule("com.dylanvivi.openfire.common.DylanModule");
 
-新建xmpp-plugin项目，通过jetty搭建webservice服务。[参考文章](http://blog.csdn.net/robert8803/article/details/8137461)
+新建xmpp-plugin项目，通过jetty搭建webservice服务，[参考文章](http://blog.csdn.net/robert8803/article/details/8137461)。
 
 运行结果：
 
 ![image](/assets/post-images/2014-05-15-6732b424-2b28-4460-eb26-e390ed0f68cd.png)
 
-![image](/assets/post-images/2014-05-15-18fcc942-bdef-478a-b44c-2c745dfbaa34.png)
+
+![image](/assets/post-images/2014-05-15-8a790299-942f-4635-a625-a7db9614d790.png)
+
 
 
