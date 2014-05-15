@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Openfire发布webservice接口
-category: notes---
+category: notes
+---
 
 之前碰到有人问怎么把openfire的接口发布成webservice，由于我们项目中采用的是Dubbo形式，还真就没实际操作过。不过估计原理差不多，得空研究一下。
 
@@ -28,26 +29,26 @@ webservice服务
 
 **测试代码**
 
-  public class TestXFire {
-  
-  	public static void main(String[] args) {
-  		TestXFire tMain = new TestXFire();
-  		tMain.testWebservice();
-  	}
-  
-  	public void testWebservice() {
-  		Client client;
-  		try {
-  			client = new Client(new URL("http://127.0.0.1:8190/OpenfireWebService?wsdl"));
-  			Object[] hello = client.invoke("sayHello", new Object[] { new String("dylan") });
-  			System.out.println(hello[0]);
-  		} catch (MalformedURLException e) {
-  			e.printStackTrace();
-  		} catch (Exception e) {
-  			e.printStackTrace();
-  		}
-  	}
-  }
+      public class TestXFire {
+      
+      	public static void main(String[] args) {
+      		TestXFire tMain = new TestXFire();
+      		tMain.testWebservice();
+      	}
+      
+      	public void testWebservice() {
+      		Client client;
+      		try {
+      			client = new Client(new URL("http://127.0.0.1:8190/OpenfireWebService?wsdl"));
+      			Object[] hello = client.invoke("sayHello", new Object[] { new String("dylan") });
+      			System.out.println(hello[0]);
+      		} catch (MalformedURLException e) {
+      			e.printStackTrace();
+      		} catch (Exception e) {
+      			e.printStackTrace();
+      		}
+      	}
+      }
   
 输出：
 
