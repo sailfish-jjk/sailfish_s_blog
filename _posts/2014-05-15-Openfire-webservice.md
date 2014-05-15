@@ -1,8 +1,7 @@
 ---
 layout: post
 title: Openfire发布webservice接口
-category: notes
----
+category: notes---
 
 之前碰到有人问怎么把openfire的接口发布成webservice，由于我们项目中采用的是Dubbo形式，还真就没实际操作过。不过估计原理差不多，得空研究一下。
 
@@ -37,11 +36,11 @@ category: notes
 
 运行结果：
 
-![image](/assets/post-images/2014-05-15-824aeea7-faff-4962-e9de-06644f28774a.png)
+![image](/assets/post-images/2014-05-15-6d456ef2-b56a-4787-90cf-1a2ebe8d5370.png)
 
 openfire启动...init plugin...
 
-![image](/assets/post-images/2014-05-15-8a790299-942f-4635-a625-a7db9614d790.png)
+![image](/assets/post-images/2014-05-15-28f2689d-3044-438b-fab8-bf3eb4f3987d.png)
 
 webservice服务
 
