@@ -7,9 +7,9 @@ permalink: /posts/:title.html
 exclude:
   - README.md
 
-name: 闲敲棋子
-host: dylanvivi.github.com
-desc: 闲敲棋子落灯花
+name: Sailfish's blog
+host: sailfish-jjk.github.io
+desc: sailfish's first blog .
 
 custom:
     category:
